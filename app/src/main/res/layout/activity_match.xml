@@ -36,12 +36,23 @@
                     android:background="@color/colorAccentDark"
                     android:layout_marginVertical="10dp"/>
 
-                <ImageView
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:src="@drawable/ic_settings_black_24dp"
-                    android:background="@drawable/button_drawable"
-                    android:onClick="flipAnimation"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:src="@drawable/aerodynamic"
+                        android:background="@drawable/button_drawable"
+                        android:onClick="flipAnimation"/>
+                    <ImageView
+                        android:id="@+id/image_back"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:src="@drawable/ic_settings_black_24dp"
+                        android:background="@drawable/button_drawable"
+                        android:rotationY="90"/>
+                </RelativeLayout>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
