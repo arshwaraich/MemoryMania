@@ -2,6 +2,13 @@
     <string name="app_name">Memory Mania</string>
     <string name="title_activity_settings">Settings</string>
 
+    <!-- Difficulty setting -->
+    <string-array name="difficulty_array">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
+
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>

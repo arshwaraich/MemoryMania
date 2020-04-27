@@ -1,13 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MatchActivity">
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Hello"/>
-</LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Matched - x3"
+                    android:textColor="@color/colorDark"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccentDark"
+                    android:layout_marginVertical="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac malesuada erat. Curabitur eleifend malesuada diam, aliquam placerat ante vulputate ultricies. Aliquam lectus enim, fermentum ac ex id, commodo lacinia purus. Nunc finibus vitae odio eu rhoncus. Donec ac placerat nisi. Morbi tempus eget orci et vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consequat vel nibh vel euismod.
+
+Sed elit quam, consequat a lacinia efficitur, ultrices ut diam. Sed quis magna ullamcorper, rhoncus leo nec, euismod nunc. Suspendisse mollis erat nisl. Donec ut lobortis nisl, eget tempus ipsum. Etiam commodo turpis in eros tristique tempus. Quisque metus nisi, vehicula nec imperdiet non, rhoncus non velit. Phasellus augue lectus, porttitor faucibus tempus vitae, vehicula eget tortor. Nulla facilisi. Phasellus dignissim sit amet risus quis tempus. Integer auctor quis velit eget tempus. Fusce ut odio lorem. Quisque id leo in ex faucibus accumsan. Curabitur a ante at ante molestie molestie quis in tortor. In tristique nulla sed dignissim molestie.
+
+Phasellus pellentesque massa eget dolor suscipit, ac rutrum arcu faucibus. Proin iaculis blandit massa quis congue. Aenean a leo at ligula maximus aliquam. Sed nec iaculis est. Nullam mi lorem, convallis quis est sed, pulvinar faucibus lorem. Ut nisl lacus, dapibus a laoreet a, dictum nec sapien. Aliquam sollicitudin vel sem at consectetur. Vivamus suscipit tortor ac ante congue, quis tempus tellus blandit. Fusce ultricies ultrices libero quis vehicula. Nam sodales facilisis metus quis scelerisque. Morbi facilisis varius velit cursus dictum. Sed facilisis commodo purus vitae venenatis. Curabitur cursus elementum urna, eget venenatis nulla sodales ac.
+
+In feugiat, ex eget maximus varius, nisl eros semper enim, at laoreet metus lacus eget nibh. Mauris lacinia, libero eu vulputate vehicula, tortor est tincidunt tellus, quis viverra mauris risus id nisi. Vestibulum quis vulputate diam. Pellentesque at suscipit massa. Nunc et arcu sit amet lorem dictum semper sed id sapien. Duis nec lectus aliquam tellus ultricies condimentum. Vivamus lobortis, eros nec consectetur venenatis, nulla ligula vulputate libero, a rhoncus massa nulla facilisis justo. Duis gravida justo dictum dolor sodales, eget tempus arcu fringilla.
+
+Proin dignissim, nisl euismod vehicula finibus, lectus eros consectetur enim, ut rhoncus turpis tortor in purus. Vivamus ultricies magna nec blandit gravida. Maecenas at hendrerit dui. Maecenas eget purus ut tellus placerat fringilla. Proin accumsan id nulla rutrum posuere. Integer in leo dapibus, consequat ipsum nec, pharetra quam. Nulla aliquam, ipsum quis tempor aliquet, odio felis semper sem, vel auctor erat dolor rhoncus enim. Nullam felis risus, cursus vel magna in, venenatis ultrices velit. Nulla varius tellus volutpat mi scelerisque, in fringilla enim sollicitudin. In auctor mi eget dolor bibendum accumsan. Cras non turpis tellus. Curabitur vitae est quis ante tempus porttitor. Praesent eu sollicitudin purus. Nulla facilisi. Curabitur a nunc interdum, scelerisque est ac, interdum risus."/>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:background="@color/colorAccentDark"/>
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:background="@drawable/light_drawable"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:padding="10dp">
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1">
+            <ProgressBar
+                android:id="@+id/determinateBar"
+                style="@style/CustomProgressBar"
+                android:theme="@style/CustomProgressBar"
+                android:minHeight="45dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:progress="50"
+                android:layout_marginEnd="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50"
+                android:textSize="20sp"
+                android:textColor="@color/colorDark"
+                android:padding="10dp"
+                android:layout_alignStart="@id/determinateBar"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_shuffle_black_24dp"
+            android:background="@drawable/ripple_drawable"
+            android:padding="10dp"
+            android:layout_marginStart="5dp"
+            android:minWidth="45dp"
+            android:contentDescription="Shuffle"
+            android:onClick="showResult"/>
+    </LinearLayout>
+</RelativeLayout>
