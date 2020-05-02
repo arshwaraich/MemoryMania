@@ -26,6 +26,7 @@
                     android:textSize="40sp"
                     android:textStyle="bold" />
                 <ImageView
+                    android:id="@+id/matched_image"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:src="@drawable/ic_settings_black_24dp"
