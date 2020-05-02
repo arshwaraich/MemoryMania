@@ -42,17 +42,21 @@
                     <ImageView
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/aerodynamic"
+                        android:src="@drawable/ic_settings_black_24dp"
                         android:background="@drawable/button_drawable"
                         android:onClick="flipAnimation"/>
                     <ImageView
                         android:id="@+id/image_back"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/ic_settings_black_24dp"
                         android:background="@drawable/button_drawable"
-                        android:rotationY="90"/>
+                        android:rotationY="-90"/>
                 </RelativeLayout>
+                <TextView
+                    android:id="@+id/api_res_JSON"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem Ipsum"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
