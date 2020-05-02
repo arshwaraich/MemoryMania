@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.memorymania.model.Products;
 import com.example.memorymania.model.RetroPhoto;
 import com.example.memorymania.network.GetDataService;
 import com.example.memorymania.network.RetrofitClientInstance;
@@ -39,21 +40,23 @@ public class MatchActivity extends AppCompatActivity {
 
         /*Create handle for the RetrofitInstance interface*/
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<List<RetroPhoto>> call = service.getAllPhotos();
-        call.enqueue(new Callback<List<RetroPhoto>>() {
+        Call<Products> call = service.getAllProducts();
+        call.enqueue(new Callback<Products>() {
             @Override
-            public void onResponse(Call<List<RetroPhoto>> call, Response<List<RetroPhoto>> response) {
+            public void onResponse(Call<Products> call, Response<Products> response) {
                 progressDoalog.dismiss();
-                String imgURL = response.body().get(0).getThumbnailUrl();
+                String imgURL = response.body().getProducts().get(1).getImage().getSrc();
                 TextView textView = findViewById(R.id.api_res_JSON);
                 ImageView imageView = findViewById(R.id.image_back);
+                ImageView imageView1 = findViewById(R.id.matched_image);
 
                 textView.setText(imgURL);
                 Picasso.get().load(imgURL).into(imageView);
+                Picasso.get().load(imgURL).into(imageView1);
             }
 
             @Override
-            public void onFailure(Call<List<RetroPhoto>> call, Throwable t) {
+            public void onFailure(Call<Products> call, Throwable t) {
                 progressDoalog.dismiss();
                 Toast.makeText(MatchActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }

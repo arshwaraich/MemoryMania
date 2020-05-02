@@ -4,62 +4,40 @@ import com.google.gson.annotations.SerializedName;
 
 public class RetroPhoto {
 
-    @SerializedName("albumId")
-    private Integer albumId;
     @SerializedName("id")
-    private Integer id;
-    @SerializedName("title")
-    private String title;
-    @SerializedName("url")
-    private String url;
-    @SerializedName("thumbnailUrl")
-    private String thumbnailUrl;
+    private long id;
+    @SerializedName("albumId")
+    private long product_id;
+    @SerializedName("src")
+    private String src;
 
-    public RetroPhoto(Integer albumId, Integer id, String title, String url, String thumbnailUrl) {
-        this.albumId = albumId;
+    public RetroPhoto(long id, long product_id, String src) {
         this.id = id;
-        this.title = title;
-        this.url = url;
-        this.thumbnailUrl = thumbnailUrl;
+        this.product_id = product_id;
+        this.src = src;
     }
 
-    public Integer getAlbumId() {
-        return albumId;
-    }
-
-    public void setAlbumId(Integer albumId) {
-        this.albumId = albumId;
-    }
-
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public long getProduct_id() {
+        return product_id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setProduct_id(long product_id) {
+        this.product_id = product_id;
     }
 
-    public String getUrl() {
-        return url;
+    public String getSrc() {
+        return src;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
-    }
-
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
+    public void setSrc(String src) {
+        this.src = src;
     }
 }
