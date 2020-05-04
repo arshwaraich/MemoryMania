@@ -1,4 +1,4 @@
-package com.example.memorymania.model;
+package com.example.memorymania.data;
 
 import com.google.gson.annotations.SerializedName;
 

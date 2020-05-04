@@ -1,10 +1,12 @@
-package com.example.memorymania;
+package com.example.memorymania.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.memorymania.R;
 
 public class ResultActivity extends AppCompatActivity {
 
