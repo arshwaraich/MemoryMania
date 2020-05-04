@@ -1,6 +1,6 @@
-package com.example.memorymania.network;
+package com.example.memorymania.util;
 
-import com.example.memorymania.model.Products;
+import com.example.memorymania.data.Products;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

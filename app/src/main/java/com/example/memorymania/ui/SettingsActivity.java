@@ -1,4 +1,4 @@
-package com.example.memorymania;
+package com.example.memorymania.ui;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.memorymania.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

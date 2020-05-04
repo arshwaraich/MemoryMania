@@ -1,6 +1,8 @@
-package com.example.memorymania;
+package com.example.memorymania.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -8,18 +10,16 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.memorymania.model.Products;
-import com.example.memorymania.model.RetroPhoto;
-import com.example.memorymania.network.GetDataService;
-import com.example.memorymania.network.RetrofitClientInstance;
+import com.example.memorymania.R;
+import com.example.memorymania.util.MatchRecycleAdapter;
+import com.example.memorymania.data.Products;
+import com.example.memorymania.util.GetDataService;
+import com.example.memorymania.util.RetrofitClientInstance;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,16 +27,16 @@ import retrofit2.Response;
 
 public class MatchActivity extends AppCompatActivity {
 
-    ProgressDialog progressDoalog;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match);
 
-        progressDoalog = new ProgressDialog(MatchActivity.this);
-        progressDoalog.setMessage("Loading....");
-        progressDoalog.show();
+        progressDialog = new ProgressDialog(MatchActivity.this);
+        progressDialog.setMessage("Loading....");
+        progressDialog.show();
 
         /*Create handle for the RetrofitInstance interface*/
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
@@ -44,20 +44,25 @@ public class MatchActivity extends AppCompatActivity {
         call.enqueue(new Callback<Products>() {
             @Override
             public void onResponse(Call<Products> call, Response<Products> response) {
-                progressDoalog.dismiss();
-                String imgURL = response.body().getProducts().get(1).getImage().getSrc();
-                TextView textView = findViewById(R.id.api_res_JSON);
-                ImageView imageView = findViewById(R.id.image_back);
+                progressDialog.dismiss();
+
+                RecyclerView recyclerView = findViewById(R.id.recycler_view);
+                recyclerView.setHasFixedSize(true);
+                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(MatchActivity.this, 4);
+                recyclerView.setLayoutManager(layoutManager);
+
+                RecyclerView.Adapter mAdapter = new MatchRecycleAdapter(response.body().getProducts());
+                recyclerView.setAdapter(mAdapter);
+
+                String imgURL = response.body().getProducts().get(0).getImage().getSrc();
                 ImageView imageView1 = findViewById(R.id.matched_image);
 
-                textView.setText(imgURL);
-                Picasso.get().load(imgURL).into(imageView);
                 Picasso.get().load(imgURL).into(imageView1);
             }
 
             @Override
             public void onFailure(Call<Products> call, Throwable t) {
-                progressDoalog.dismiss();
+                progressDialog.dismiss();
                 Toast.makeText(MatchActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -68,11 +73,12 @@ public class MatchActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void flipAnimation(View view) {
-        ImageView imageBack = findViewById(R.id.image_back);
+    public void flipAnimationLarge(View viewGroup) {
+        ImageView imageFront = (ImageView) ((ViewGroup)viewGroup).getChildAt(0);
+        ImageView imageBack = (ImageView) ((ViewGroup)viewGroup).getChildAt(1);
 
         AnimatorSet animatorSet = new AnimatorSet();
-        ObjectAnimator flip = ObjectAnimator.ofFloat(view, "rotationY", 0f, 90f);
+        ObjectAnimator flip = ObjectAnimator.ofFloat(imageFront, "rotationY", 0f, 90f);
         flip.setDuration(250);
         ObjectAnimator flip3 = ObjectAnimator.ofFloat(imageBack, "rotationY", -90f, 0f);
         flip3.setDuration(250);

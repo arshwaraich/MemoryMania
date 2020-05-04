@@ -4,67 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MatchActivity">
+    tools:context=".ui.MatchActivity">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="15dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Matched - x3"
-                    android:textColor="@color/colorDark"
-                    android:textSize="40sp"
-                    android:textStyle="bold" />
-                <ImageView
-                    android:id="@+id/matched_image"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:src="@drawable/ic_settings_black_24dp"
-                    android:background="@drawable/matched_card_drawable"/>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorAccentDark"
-                    android:layout_marginVertical="10dp"/>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:src="@drawable/ic_settings_black_24dp"
-                        android:background="@drawable/button_drawable"
-                        android:onClick="flipAnimation"/>
-                    <ImageView
-                        android:id="@+id/image_back"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:background="@drawable/button_drawable"
-                        android:rotationY="-90"/>
-                </RelativeLayout>
-                <TextView
-                    android:id="@+id/api_res_JSON"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Lorem Ipsum"/>
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:background="@color/colorAccentDark"/>
-        </LinearLayout>
-    </ScrollView>
+            android:text="Matched - x3"
+            android:textColor="@color/colorDark"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/matched_image"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/ic_settings_black_24dp"
+            android:background="@drawable/matched_card_drawable"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccentDark"
+            android:layout_marginVertical="10dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="60dp"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

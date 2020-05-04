@@ -1,4 +1,4 @@
-package com.example.memorymania.network;
+package com.example.memorymania.util;
 
 import java.io.IOException;
 import java.net.URL;
