@@ -1,82 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.MatchActivity">
-
-    <LinearLayout
+<layout>
+    <data>
+        <variable
+            name="numMatched"
+            type="androidx.databinding.ObservableInt" />
+        <variable
+            name="numMax"
+            type="androidx.databinding.ObservableInt" />
+    </data>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="15dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Matched - x3"
-            android:textColor="@color/colorDark"
-            android:textSize="40sp"
-            android:textStyle="bold" />
-        <ImageView
-            android:id="@+id/matched_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/ic_settings_black_24dp"
-            android:background="@drawable/matched_card_drawable"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorAccentDark"
-            android:layout_marginVertical="10dp"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        tools:context=".ui.MatchActivity">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="60dp"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="10dp"
-        android:background="@drawable/light_drawable"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_margin="5dp"
-        android:padding="10dp">
-        <RelativeLayout
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1">
-            <ProgressBar
-                android:id="@+id/determinateBar"
-                style="@style/CustomProgressBar"
-                android:theme="@style/CustomProgressBar"
-                android:minHeight="45dp"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:progress="50"
-                android:layout_marginEnd="5dp"/>
+            android:orientation="vertical"
+            android:padding="15dp">
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{String.format(@string/Matched_Title,String.valueOf(numMatched))}"
+                android:textColor="@color/colorDark"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/matched_image"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/ic_settings_black_24dp"
+                android:background="@drawable/matched_card_drawable"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorAccentDark"
+                android:layout_marginVertical="10dp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="60dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:background="@drawable/light_drawable"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:padding="10dp">
+            <RelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1">
+                <ProgressBar
+                    android:id="@+id/determinateBar"
+                    style="@style/CustomProgressBar"
+                    android:theme="@style/CustomProgressBar"
+                    android:minHeight="45dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:progress="@{numMatched}"
+                    android:max="@{numMax}"
+                    android:layout_marginEnd="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(numMatched)}"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorDark"
+                    android:padding="10dp"
+                    android:layout_alignStart="@id/determinateBar"
+                    android:layout_centerVertical="true"/>
+            </RelativeLayout>
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="50"
-                android:textSize="20sp"
-                android:textColor="@color/colorDark"
+                android:src="@drawable/ic_shuffle_black_24dp"
+                android:background="@drawable/ripple_drawable"
                 android:padding="10dp"
-                android:layout_alignStart="@id/determinateBar"
-                android:layout_centerVertical="true"/>
-        </RelativeLayout>
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_shuffle_black_24dp"
-            android:background="@drawable/ripple_drawable"
-            android:padding="10dp"
-            android:layout_marginStart="5dp"
-            android:minWidth="45dp"
-            android:contentDescription="Shuffle"
-            android:onClick="showResult"/>
-    </LinearLayout>
-</RelativeLayout>
+                android:layout_marginStart="5dp"
+                android:minWidth="45dp"
+                android:contentDescription="Shuffle"
+                android:onClick="updateMatch"/>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

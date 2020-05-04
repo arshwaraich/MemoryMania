@@ -1,8 +1,11 @@
 package com.example.memorymania.util;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +18,7 @@ import java.util.List;
 
 public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapter.MatchViewHolder> {
     private List<Product> dataset;
+    private List<Product> currMatch;
 
     class MatchViewHolder extends RecyclerView.ViewHolder {
         ViewGroup view;
@@ -31,17 +35,25 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
     @NonNull
     @Override
     public MatchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // create a new view
         ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.match_card, parent, false);
-        MatchViewHolder vh = new MatchViewHolder(v);
-        return vh;
+        return new MatchViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(MatchViewHolder holder, int position) {
-        ImageView imageView = (ImageView) holder.view.getChildAt(1);
-        Picasso.get().load(dataset.get(position).getImage().getSrc()).into(imageView);
+    public void onBindViewHolder(MatchViewHolder holder, final int position) {
+        Product.MatchState matchState = dataset.get(position).getMatchState();
+        if(matchState == Product.MatchState.SHOWN) {
+            ImageView imageView = (ImageView) holder.view.getChildAt(1);
+            imageView.setVisibility(View.VISIBLE);
+        } else if (matchState == Product.MatchState.MATCHED) {
+            ImageView imageView = (ImageView) holder.view.getChildAt(2);
+            imageView.setVisibility(View.VISIBLE);
+            Picasso.get().load(dataset.get(position).getImage().getSrc()).into(imageView);
+        } else {
+            ImageView imageView = (ImageView) holder.view.getChildAt(0);
+            imageView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

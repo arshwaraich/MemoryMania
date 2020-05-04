@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Product {
 
-    enum MatchState {
+    public enum MatchState {
         MATCHED,
         HIDDEN,
         SHOWN

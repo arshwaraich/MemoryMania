@@ -3,20 +3,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:onClick="flipAnimationLarge"
     android:padding="5dp">
     <ImageView
-        android:id="@+id/image_front"
+        android:id="@+id/image_hidden"
         android:adjustViewBounds="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_image_black_24dp"
-        android:background="@drawable/button_drawable"/>
+        android:background="@drawable/button_drawable"
+        android:visibility="gone"/>
     <ImageView
-        android:id="@+id/image_back"
+        android:id="@+id/image_shown"
         android:adjustViewBounds="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_drawable"
-        android:rotationY="-90"/>
+        android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/image_matched"
+        android:adjustViewBounds="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_check_black_24dp"
+        android:background="@drawable/button_drawable"
+        android:visibility="gone"/>
 </RelativeLayout>
