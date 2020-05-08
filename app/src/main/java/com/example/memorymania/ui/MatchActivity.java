@@ -11,7 +11,6 @@ import android.animation.ObjectAnimator;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +25,7 @@ import com.example.memorymania.util.MatchRecycleAdapter;
 import com.example.memorymania.data.Products;
 import com.example.memorymania.util.GetDataService;
 import com.example.memorymania.util.RetrofitClientInstance;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -127,7 +124,7 @@ public class MatchActivity extends AppCompatActivity {
     public void showResult() {
         Chronometer chronometer = findViewById(R.id.chronometer);
         chronometer.stop();
-        long score = chronometer.getBase();
+        long score = SystemClock.elapsedRealtime() - chronometer.getBase();
 
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra(EXTRA_SCORE, score);
