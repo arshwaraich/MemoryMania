@@ -20,13 +20,30 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="15dp">
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{String.format(@string/Matched_Title,String.valueOf(numMatched*2))}"
-                android:textColor="@color/colorDark"
-                android:textSize="40sp"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/title_text"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.format(@string/Matched_Title,String.valueOf(numMatched))}"
+                    android:textColor="@color/colorDark"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
+                <Chronometer
+                    android:id="@+id/chronometer"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@id/title_text"
+                    android:layout_alignBottom="@id/title_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:drawableStart="@drawable/ic_timer_black_24dp"/>
+            </RelativeLayout>
 <!--            <ImageView-->
 <!--                android:id="@+id/matched_image"-->
 <!--                android:layout_width="45dp"-->
@@ -71,7 +88,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{String.format(@string/Matched_Progress, String.valueOf(numMatched*2),String.valueOf(numMax))}"
+                    android:text="@{String.format(@string/Matched_Progress, String.valueOf(numMatched),String.valueOf(numMax))}"
                     android:textSize="20sp"
                     android:textColor="@color/colorDark"
                     android:padding="10dp"

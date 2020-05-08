@@ -12,7 +12,7 @@ public class Products {
 
     private List<Product> duplicateProducts() {
         // TODO: Temp size curb
-        products = products.subList(0, 10);
+        products = products.subList(0, 2);
 
         List<Product> copyProducts =  new ArrayList<>(products);
         products.addAll(copyProducts);
