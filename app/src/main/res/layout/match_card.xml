@@ -26,8 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_drawable"
-            android:visibility="visible"
-            android:alpha="@{(matchState == MatchState.SHOWN) ? 1.0F : 0.5F}"/>
+            android:visibility="@{(matchState == MatchState.SHOWN) ? View.VISIBLE : View.GONE}"/>
         <ImageView
             android:id="@+id/image_matched"
             android:adjustViewBounds="true"
