@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -34,11 +35,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MatchActivity extends AppCompatActivity {
+    public static final String EXTRA_SCORE = "com.example.memorymania.SCORE";
 
     ActivityMatchBinding activityMatchBinding;
     ProgressDialog progressDialog;
     final ObservableInt numMatched = new ObservableInt();
     final ObservableInt numMax = new ObservableInt();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +50,12 @@ public class MatchActivity extends AppCompatActivity {
                 this, R.layout.activity_match
         );
 
+        // Binding variables
         activityMatchBinding.setNumMatched(numMatched);
         activityMatchBinding.setNumMax(numMax);
 
+
+        // Set progress dialog
         progressDialog = new ProgressDialog(MatchActivity.this);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
@@ -60,6 +66,8 @@ public class MatchActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(MatchActivity.this, 4);
         recyclerView.setLayoutManager(layoutManager);
 
+        // Set chronometer
+        final Chronometer chronometer = findViewById(R.id.chronometer);
 
         /*Create handle for the RetrofitInstance interface*/
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
@@ -72,7 +80,7 @@ public class MatchActivity extends AppCompatActivity {
                 final List<Product> products = response.body().getProducts();
 
                 // Set matchGrid
-                final RecyclerView.Adapter mAdapter = new MatchRecycleAdapter(products, numMatched);
+                final RecyclerView.Adapter mAdapter = new MatchRecycleAdapter(products, MatchActivity.this);
                 recyclerView.setAdapter(mAdapter);
 
 //              TODO: Implement matched grid
@@ -92,6 +100,9 @@ public class MatchActivity extends AppCompatActivity {
 
                 // Set max products
                 numMax.set(products.size());
+
+                // Start chronometer
+                chronometer.start();
             }
 
             @Override
@@ -111,9 +122,22 @@ public class MatchActivity extends AppCompatActivity {
         }
     }
 
-    public void showResult(View view) {
+    public void showResult() {
+        Chronometer chronometer = findViewById(R.id.chronometer);
+        chronometer.stop();
+        long score = chronometer.getBase();
+
         Intent intent = new Intent(this, ResultActivity.class);
+        intent.putExtra(EXTRA_SCORE, score);
         startActivity(intent);
+    }
+
+    public void incrementMatches(int increment) {
+        numMatched.set(numMatched.get() + increment);
+
+        if(numMatched.get() >= numMax.get()) {
+            this.showResult();
+        }
     }
 
     public void flipAnimationLarge(View viewGroup) {

@@ -1,5 +1,6 @@
 package com.example.memorymania.util;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.memorymania.R;
 import com.example.memorymania.data.Product;
 import com.example.memorymania.databinding.MatchCardBinding;
+import com.example.memorymania.ui.MatchActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
 
     private List<Product> dataset;
     private List<Integer> matchedIndex;
-    private ObservableInt numMatched;
+    private Context context;
 
     class MatchViewHolder extends RecyclerView.ViewHolder {
         final MatchCardBinding item;
@@ -55,7 +57,7 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
             }
         }
 
-        // TODO: Use contains with comparator instead
+        // TODO: Improve looping
         private Boolean isMatch(Integer index) {
             boolean ret = true;
             long currId = dataset.get(index).getId();
@@ -65,7 +67,7 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
             return ret;
         }
 
-        // TODO: Use contains with comparator instead
+        // TODO: Improve looping
         private void hideLogic() {
             for(int i: matchedIndex) {
                 dataset.get(i).setMatchState(Product.MatchState.HIDDEN);
@@ -74,13 +76,14 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
             matchedIndex.clear();
         }
 
+        // TODO: Improve looping
         private void matchLogic() {
             for(int i: matchedIndex) {
                 dataset.get(i).setMatchState(Product.MatchState.MATCHED);
                 notifyDataSetChanged();
             }
             matchedIndex.clear();
-            numMatched.set(numMatched.get() + 1);
+            ((MatchActivity) context).incrementMatches(NUM_MATCHES);
         }
 
         MatchViewHolder(MatchCardBinding itemView) {
@@ -89,10 +92,10 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
         }
     }
 
-    public MatchRecycleAdapter(List<Product> dataset, ObservableInt numMatched) {
+    public MatchRecycleAdapter(List<Product> dataset, Context context) {
         this.dataset = dataset;
         this.matchedIndex = new ArrayList<>();
-        this.numMatched = numMatched;
+        this.context = context;
         this.shuffleProducts();
     }
 

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Chronometer;
+import android.widget.TextView;
 
 import com.example.memorymania.R;
 
@@ -14,6 +16,12 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+
+        Intent intent = getIntent();
+        long score = intent.getLongExtra(MatchActivity.EXTRA_SCORE, 0);
+
+        Chronometer chronometer = findViewById(R.id.chronometer_score);
+        chronometer.setBase(score);
     }
 
     @Override
