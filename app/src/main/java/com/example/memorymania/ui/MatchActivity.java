@@ -11,6 +11,7 @@ import android.animation.ObjectAnimator;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,8 +26,8 @@ import com.example.memorymania.util.GetDataService;
 import com.example.memorymania.util.RetrofitClientInstance;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,6 +54,13 @@ public class MatchActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading....");
         progressDialog.show();
 
+        // Set recycler view
+        final RecyclerView recyclerView = findViewById(R.id.match_grid);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(MatchActivity.this, 4);
+        recyclerView.setLayoutManager(layoutManager);
+
+
         /*Create handle for the RetrofitInstance interface*/
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<Products> call = service.getAllProducts();
@@ -61,26 +69,28 @@ public class MatchActivity extends AppCompatActivity {
             public void onResponse(Call<Products> call, Response<Products> response) {
                 progressDialog.dismiss();
 
-                List<Product> products = response.body().getProducts();
+                final List<Product> products = response.body().getProducts();
 
                 // Set matchGrid
-                RecyclerView recyclerView = findViewById(R.id.recycler_view);
-                recyclerView.setHasFixedSize(true);
-                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(MatchActivity.this, 4);
-                recyclerView.setLayoutManager(layoutManager);
-
-                RecyclerView.Adapter mAdapter = new MatchRecycleAdapter(products);
+                final RecyclerView.Adapter mAdapter = new MatchRecycleAdapter(products, numMatched);
                 recyclerView.setAdapter(mAdapter);
 
-                // Set matchedGrid
-                String imgURL = response.body().getProducts().get(0).getImage().getSrc();
-                ImageView imageView1 = findViewById(R.id.matched_image);
+//              TODO: Implement matched grid
 
-                Picasso.get().load(imgURL).into(imageView1);
+//                // Set matchedGrid
+//                matchedProducts.add(products.get(0));
+//                matchedProducts.add(products.get(1));
+//                String imgURL = response.body().getProducts().get(0).getImage().getSrc();
+//                ImageView imageView1 = findViewById(R.id.matched_image);
+//
+//                Picasso.get()
+//                        .load(imgURL)
+//                        .error(R.drawable.ic_broken_image_black_24dp)
+//                        .into(imageView1);
 
                 // TODO: Set Title
 
-                // Set progress bar
+                // Set max products
                 numMax.set(products.size());
             }
 
@@ -92,8 +102,13 @@ public class MatchActivity extends AppCompatActivity {
         });
     }
 
-    public void updateMatch(View view) {
-        numMatched.set(numMatched.get() + 1);
+    public void shuffleMatchGird(View view) {
+        RecyclerView recyclerView = findViewById(R.id.match_grid);
+
+        MatchRecycleAdapter matchRecycleAdapter = (MatchRecycleAdapter) recyclerView.getAdapter();
+        if (matchRecycleAdapter != null) {
+            matchRecycleAdapter.shuffleProducts();
+        }
     }
 
     public void showResult(View view) {

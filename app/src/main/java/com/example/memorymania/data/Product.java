@@ -18,6 +18,10 @@ public class Product {
 
     private MatchState matchState;
 
+    public Product() {
+        this.matchState = MatchState.HIDDEN;
+    }
+
     public Product(long id, RetroPhoto image) {
         this.id = id;
         this.image = image;
