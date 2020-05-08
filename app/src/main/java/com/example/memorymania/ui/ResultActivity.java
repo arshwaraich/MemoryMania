@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.memorymania.R;
 
 public class ResultActivity extends AppCompatActivity {
+    private long scorel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,10 +20,10 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         Intent intent = getIntent();
-        long score = intent.getLongExtra(MatchActivity.EXTRA_SCORE, 0);
+        scorel = intent.getLongExtra(MatchActivity.EXTRA_SCORE, 0);
 
         Chronometer chronometer = findViewById(R.id.chronometer_score);
-        chronometer.setBase(score);
+        chronometer.setBase(SystemClock.elapsedRealtime() - scorel);
     }
 
     @Override
@@ -40,8 +41,6 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     public void shareResult(View view) {
-        Chronometer chronometer = findViewById(R.id.chronometer_score);
-        long scorel = SystemClock.elapsedRealtime() - chronometer.getBase();
         String score = (scorel/1000) + " seconds \uD83C\uDF89\uD83C\uDF89!!";
 
         Intent sendIntent = new Intent();
