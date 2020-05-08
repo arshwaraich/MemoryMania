@@ -45,15 +45,21 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
         }
 
         private void showLogic(Integer index) {
-            item.setMatchState(Product.MatchState.SHOWN);
-            item.executePendingBindings();
+            if(item.getMatchState() == Product.MatchState.HIDDEN) {
+                item.setMatchState(Product.MatchState.SHOWN);
+                item.executePendingBindings();
 
-            matchedIndex.add(index);
+                matchedIndex.add(index);
 
-            if(!isMatch(index)) {
+                if(!isMatch(index)) {
+                    hideLogic();
+                } else if(matchedIndex.size() >= NUM_MATCHES) {
+                    matchLogic();
+                }
+            } else if(item.getMatchState() == Product.MatchState.SHOWN) {
+                item.setMatchState(Product.MatchState.HIDDEN);
+                item.executePendingBindings();
                 hideLogic();
-            } else if(matchedIndex.size() >= NUM_MATCHES) {
-                matchLogic();
             }
         }
 
