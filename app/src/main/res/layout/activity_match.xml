@@ -23,23 +23,23 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{String.format(@string/Matched_Title,String.valueOf(numMatched))}"
+                android:text="@{String.format(@string/Matched_Title,String.valueOf(numMatched*2))}"
                 android:textColor="@color/colorDark"
                 android:textSize="40sp"
                 android:textStyle="bold" />
-            <ImageView
-                android:id="@+id/matched_image"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:src="@drawable/ic_settings_black_24dp"
-                android:background="@drawable/matched_card_drawable"/>
+<!--            <ImageView-->
+<!--                android:id="@+id/matched_image"-->
+<!--                android:layout_width="45dp"-->
+<!--                android:layout_height="45dp"-->
+<!--                android:src="@drawable/ic_settings_black_24dp"-->
+<!--                android:background="@drawable/matched_card_drawable"/>-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorAccentDark"
                 android:layout_marginVertical="10dp"/>
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
+                android:id="@+id/match_grid"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="60dp"/>
@@ -71,7 +71,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(numMatched)}"
+                    android:text="@{String.format(@string/Matched_Progress, String.valueOf(numMatched*2),String.valueOf(numMax))}"
                     android:textSize="20sp"
                     android:textColor="@color/colorDark"
                     android:padding="10dp"
@@ -87,7 +87,7 @@
                 android:layout_marginStart="5dp"
                 android:minWidth="45dp"
                 android:contentDescription="Shuffle"
-                android:onClick="updateMatch"/>
+                android:onClick="shuffleMatchGird"/>
         </LinearLayout>
     </RelativeLayout>
 </layout>

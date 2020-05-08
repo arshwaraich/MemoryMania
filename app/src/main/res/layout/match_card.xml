@@ -1,30 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="5dp">
-    <ImageView
-        android:id="@+id/image_hidden"
-        android:adjustViewBounds="true"
-        android:layout_width="match_parent"
+<layout>
+    <data>
+        <import type="com.example.memorymania.data.Product.MatchState" alias="MatchState"/>
+        <import type="android.view.View"/>
+        <variable
+            name="matchState"
+            type="MatchState"/>
+    </data>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_image_black_24dp"
-        android:background="@drawable/button_drawable"
-        android:visibility="gone"/>
-    <ImageView
-        android:id="@+id/image_shown"
-        android:adjustViewBounds="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_drawable"
-        android:visibility="gone"/>
-    <ImageView
-        android:id="@+id/image_matched"
-        android:adjustViewBounds="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_check_black_24dp"
-        android:background="@drawable/button_drawable"
-        android:visibility="gone"/>
-</RelativeLayout>
+        android:padding="5dp">
+        <ImageView
+            android:id="@+id/image_hidden"
+            android:adjustViewBounds="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_image_black_24dp"
+            android:background="@drawable/button_drawable"
+            android:visibility="@{(matchState == MatchState.HIDDEN) ? View.VISIBLE : View.GONE}"/>
+        <ImageView
+            android:id="@+id/image_shown"
+            android:adjustViewBounds="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_drawable"
+            android:visibility="visible"
+            android:alpha="@{(matchState == MatchState.SHOWN) ? 1.0F : 0.5F}"/>
+        <ImageView
+            android:id="@+id/image_matched"
+            android:adjustViewBounds="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_check_black_24dp"
+            android:background="@drawable/button_drawable"
+            android:visibility="@{(matchState == MatchState.MATCHED) ? View.VISIBLE : View.GONE}"/>
+    </RelativeLayout>
+</layout>
