@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Memory Mania</string>
-    <string name="title_activity_settings">Settings</string>
+
+    <string name="Matched_Title">Matched x%s</string>
+    <string name="Matched_Progress">%s / %s</string>
 
     <!-- Difficulty setting -->
     <string-array name="difficulty_array">
@@ -9,20 +11,7 @@
         <item>Hard</item>
     </string-array>
 
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="Matched_Title">Matched x%s</string>
-    <string name="Matched_Progress">%s / %s</string>
+    <integer name="grid_size">6</integer>
+    <integer name="match_size">2</integer>
+    <integer name="total_matches">10</integer>
 </resources>

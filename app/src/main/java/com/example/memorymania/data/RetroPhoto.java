@@ -14,6 +14,11 @@ public class RetroPhoto {
         this.src = src;
     }
 
+    public RetroPhoto(RetroPhoto img) {
+        this.id = img.getId();
+        this.src = img.getSrc();
+    }
+
     public long getId() {
         return id;
     }

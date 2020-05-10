@@ -28,6 +28,12 @@ public class Product {
         this.matchState = MatchState.HIDDEN;
     }
 
+    public Product(Product p) {
+        this.id = p.getId();
+        this.image = new RetroPhoto(p.getImage());
+        this.matchState = p.getMatchState();
+    }
+
     public long getId() {
         return id;
     }

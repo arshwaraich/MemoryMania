@@ -61,7 +61,7 @@ public class MatchActivity extends AppCompatActivity {
         // Set recycler view
         final RecyclerView recyclerView = findViewById(R.id.match_grid);
         recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(MatchActivity.this, 4);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(MatchActivity.this, getResources().getInteger(R.integer.grid_size));
         recyclerView.setLayoutManager(layoutManager);
 
         // Set chronometer
@@ -76,26 +76,11 @@ public class MatchActivity extends AppCompatActivity {
             public void onResponse(Call<Products> call, Response<Products> response) {
                 progressDialog.dismiss();
 
-                final List<Product> products = response.body().getProducts();
+                final List<Product> products = response.body().getProducts(MatchActivity.this);
 
                 // Set matchGrid
                 final RecyclerView.Adapter mAdapter = new MatchRecycleAdapter(products, MatchActivity.this);
                 recyclerView.setAdapter(mAdapter);
-
-//              TODO: Implement matched grid
-
-//                // Set matchedGrid
-//                matchedProducts.add(products.get(0));
-//                matchedProducts.add(products.get(1));
-//                String imgURL = response.body().getProducts().get(0).getImage().getSrc();
-//                ImageView imageView1 = findViewById(R.id.matched_image);
-//
-//                Picasso.get()
-//                        .load(imgURL)
-//                        .error(R.drawable.ic_broken_image_black_24dp)
-//                        .into(imageView1);
-
-                // TODO: Set Title
 
                 // Set max products
                 numMax.set(products.size());
@@ -137,19 +122,5 @@ public class MatchActivity extends AppCompatActivity {
         if(numMatched.get() >= numMax.get()) {
             this.showResult();
         }
-    }
-
-    public void flipAnimationLarge(View viewGroup) {
-        ImageView imageFront = (ImageView) ((ViewGroup)viewGroup).getChildAt(0);
-        ImageView imageBack = (ImageView) ((ViewGroup)viewGroup).getChildAt(1);
-
-        AnimatorSet animatorSet = new AnimatorSet();
-        ObjectAnimator flip = ObjectAnimator.ofFloat(imageFront, "rotationY", 0f, 90f);
-        flip.setDuration(250);
-        ObjectAnimator flip3 = ObjectAnimator.ofFloat(imageBack, "rotationY", -90f, 0f);
-        flip3.setDuration(250);
-
-        animatorSet.playSequentially(flip,flip3);
-        animatorSet.start();
     }
 }
