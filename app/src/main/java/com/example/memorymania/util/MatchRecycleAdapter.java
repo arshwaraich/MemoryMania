@@ -3,6 +3,10 @@ package com.example.memorymania.util;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.os.Build;
+import android.os.Handler;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -45,12 +49,27 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
                 notifyItemChanged(index);
 
                 if(!isMatch(index)) {
-                    hideLogic();
+                    ((MatchActivity)context).enableGridClick(false);
+                    VibrateFunc();
+
+                    // Delayed flip
+                    final Handler handler = new Handler();
+                    handler.postDelayed(() -> {
+                        hideLogic();
+                        ((MatchActivity)context).enableGridClick(true);
+                    }, 500);
                 } else if(
-                        (dataset.stream()
-                                .filter(item -> (item.getMatchState() == Product.MatchState.SHOWN))
-                        .collect(Collectors.toList()).size()) >= NUM_MATCHES) {
-                    matchLogic();
+                    (dataset.stream()
+                                    .filter(item -> (item.getMatchState() == Product.MatchState.SHOWN))
+                            .collect(Collectors.toList()).size()) >= NUM_MATCHES) {
+                    ((MatchActivity)context).enableGridClick(false);
+
+                    // Delayed flip
+                    final Handler handler = new Handler();
+                    handler.postDelayed(() -> {
+                        matchLogic();
+                        ((MatchActivity)context).enableGridClick(true);
+                    }, 500);
                 }
             } else if(dataset.get(index).getMatchState() == Product.MatchState.SHOWN) {
                 dataset.get(index).setMatchState(Product.MatchState.HIDDEN);
@@ -133,6 +152,18 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
             p.setMatchState(Product.MatchState.HIDDEN);
         }
         notifyDataSetChanged();
+    }
+
+    // Util
+    private void VibrateFunc() {
+        Vibrator vib = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vib.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            //deprecated in API 26
+            vib.vibrate(200);
+        }
     }
 
     // Animations
