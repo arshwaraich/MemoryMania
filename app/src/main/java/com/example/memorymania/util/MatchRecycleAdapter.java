@@ -4,7 +4,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -20,10 +19,7 @@ import com.example.memorymania.ui.MatchActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapter.MatchViewHolder> {
@@ -35,22 +31,17 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
     class MatchViewHolder extends RecyclerView.ViewHolder {
         final MatchCardBinding item;
 
-        public void bind(final Product product, final int position) {
-            item.setMatchState(product.getMatchState());
+        public void bind(final int position) {
+            item.setProduct(dataset.get(position));
             item.getRoot().setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            showLogic(position, product);
-                        }
-                    }
+                    v -> showLogic(position)
             );
             item.executePendingBindings();
         }
 
-        private void showLogic(Integer index, Product product) {
-            if(item.getMatchState() == Product.MatchState.HIDDEN) {
-                product.setMatchState(Product.MatchState.SHOWN);
+        private void showLogic(Integer index) {
+            if(dataset.get(index).getMatchState() == Product.MatchState.HIDDEN) {
+                dataset.get(index).setMatchState(Product.MatchState.SHOWN);
                 notifyItemChanged(index);
 
                 if(!isMatch(index)) {
@@ -61,8 +52,8 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
                         .collect(Collectors.toList()).size()) >= NUM_MATCHES) {
                     matchLogic();
                 }
-            } else if(item.getMatchState() == Product.MatchState.SHOWN) {
-                product.setMatchState(Product.MatchState.HIDDEN);
+            } else if(dataset.get(index).getMatchState() == Product.MatchState.SHOWN) {
+                dataset.get(index).setMatchState(Product.MatchState.HIDDEN);
                 notifyItemChanged(index);
                 hideLogic();
             }
@@ -124,15 +115,7 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
 
     @Override
     public void onBindViewHolder(MatchViewHolder holder, final int position) {
-        ViewGroup viewGroup = (ViewGroup) holder.item.getRoot();
-
-        ImageView imageView = (ImageView) viewGroup.getChildAt(1);
-        Picasso.get()
-                .load(dataset.get(position).getImage().getSrc())
-                .error(R.drawable.ic_broken_image_black_24dp)
-                .into(imageView);
-
-        holder.bind(dataset.get(position), position);
+        holder.bind(position);
     }
 
     @Override
@@ -145,9 +128,16 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
         notifyDataSetChanged();
     }
 
+    public void initDataset() {
+        for(Product p: dataset) {
+            p.setMatchState(Product.MatchState.HIDDEN);
+        }
+        notifyDataSetChanged();
+    }
+
     // Animations
     @BindingAdapter("matchState")
-    public static void spinAnimation(ViewGroup viewGroup, Product.MatchState matchState) {
+    public static void spinAnimation(ViewGroup viewGroup, Product oldProduct, Product newProduct) {
         ImageView imageHidden = viewGroup.findViewById(R.id.image_hidden);
         ImageView imageMatched = viewGroup.findViewById(R.id.image_matched);
         ImageView imageShown = viewGroup.findViewById(R.id.image_shown);
@@ -155,10 +145,15 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
         AnimatorSet animatorSet = new AnimatorSet();
         ObjectAnimator flipFront, flipBack;
 
-        if(matchState == Product.MatchState.HIDDEN) {
+        if(newProduct.getMatchState() == Product.MatchState.HIDDEN) {
             flipFront = ObjectAnimator.ofFloat(imageShown, "rotationY", 0f, -90f);
             flipBack = ObjectAnimator.ofFloat(imageHidden, "rotationY", 90f, 0f);
-        } else if(matchState == Product.MatchState.SHOWN) {
+        } else if(newProduct.getMatchState() == Product.MatchState.SHOWN) {
+            Picasso.get()
+                    .load(newProduct.getImage().getSrc())
+                    .error(R.drawable.ic_broken_image_black_24dp)
+                    .into(imageShown);
+
             flipFront = ObjectAnimator.ofFloat(imageHidden, "rotationY", 0f, 90f);
             flipBack = ObjectAnimator.ofFloat(imageShown, "rotationY", -90f, 0f);
         } else {
@@ -167,7 +162,7 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
         }
 
         flipFront.setDuration(200);
-        flipBack.setDuration(200);
+        flipBack.setDuration(400);
 
         animatorSet.playSequentially(flipFront, flipBack);
         animatorSet.start();

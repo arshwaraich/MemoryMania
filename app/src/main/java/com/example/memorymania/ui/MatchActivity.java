@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Chronometer;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.memorymania.R;
@@ -54,6 +55,7 @@ public class MatchActivity extends AppCompatActivity {
 
 
         // Set progress dialog
+        // TODO: Use non-ui blocking progress bar
         progressDialog = new ProgressDialog(MatchActivity.this);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
@@ -63,10 +65,6 @@ public class MatchActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(MatchActivity.this, getResources().getInteger(R.integer.grid_size));
         recyclerView.setLayoutManager(layoutManager);
-
-        // Set chronometer
-        final Chronometer chronometer = findViewById(R.id.chronometer);
-        chronometer.setBase(SystemClock.elapsedRealtime());
 
         /*Create handle for the RetrofitInstance interface*/
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
@@ -84,9 +82,6 @@ public class MatchActivity extends AppCompatActivity {
 
                 // Set max products
                 numMax.set(products.size());
-
-                // Start chronometer
-                chronometer.start();
             }
 
             @Override
@@ -122,5 +117,21 @@ public class MatchActivity extends AppCompatActivity {
         if(numMatched.get() >= numMax.get()) {
             this.showResult();
         }
+    }
+
+    public void startMatch(View view) {
+        // Hide button
+        view.setVisibility(View.GONE);
+
+        RecyclerView recyclerView = findViewById(R.id.match_grid);
+        ((MatchRecycleAdapter) recyclerView.getAdapter()).initDataset();
+
+        View floatingBar = findViewById(R.id.floating_bar);
+        floatingBar.setVisibility(View.VISIBLE);
+
+        // Set chronometer
+        final Chronometer chronometer = findViewById(R.id.chronometer);
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
     }
 }

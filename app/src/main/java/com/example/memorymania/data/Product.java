@@ -19,13 +19,13 @@ public class Product {
     private MatchState matchState;
 
     public Product() {
-        this.matchState = MatchState.HIDDEN;
+        this.matchState = MatchState.SHOWN;
     }
 
     public Product(long id, RetroPhoto image) {
         this.id = id;
         this.image = image;
-        this.matchState = MatchState.HIDDEN;
+        this.matchState = MatchState.SHOWN;
     }
 
     public Product(Product p) {

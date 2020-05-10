@@ -11,7 +11,7 @@
         <item>Hard</item>
     </string-array>
 
-    <integer name="grid_size">6</integer>
+    <integer name="grid_size">4</integer>
     <integer name="match_size">2</integer>
     <integer name="total_matches">10</integer>
 </resources>
