@@ -28,6 +28,7 @@ Screen | Implementation
 Added localization for language codes en-CA and fr-CA. I never had a chance to implement localization before so decided to try it out in this project.  
   
 Gave the translations my best shot but it is basically guess work + google translate at my level of french. Pre-emptive sorry for any <sup>gaffe</sup> to any french canadian who has to read through this.  
+  
 ![](./screenshots/main_fr-CA.jpg)
 ![](./screenshots/match_init_fr-CA.jpg)
 ![](./screenshots/settings_fr-CA.jpg)
@@ -36,17 +37,20 @@ Gave the translations my best shot but it is basically guess work + google trans
 
 ### Share
 Added an option to share game results to promote the app as well as it's creator. Also supports french and english.  
+  
 ![](./screenshots/share_text_en-CA_fr-CA.jpg)
 ![](./screenshots/share_card_en-CA.jpg)
 ![](./screenshots/share_card_fr-CA.jpg)
 
 ### App icons and splash screen
 The design originally had a splash screen with the app icon at the center, but i decided against implementing it as the app was already super quick to load.  
+  
 ![](./screenshots/splashscreen_figma.jpg)  
 Designed app icons using vector assets in [Android asset studio](https://github.com/romannurik/AndroidAssetStudio)
 
 ### Settings
 Added configurable grid size, match size and total matches.  
+  
 ![](./screenshots/match_init_3_en-CA.jpg)
 ![](./screenshots/match_init_5_en-CA.jpg)
 
