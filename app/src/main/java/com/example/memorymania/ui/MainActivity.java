@@ -33,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setSettings(View view) {
-        Toast.makeText(this, "Coming soon mate!", Toast.LENGTH_SHORT).show();
-
-        // TODO: implement settings activity
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 }

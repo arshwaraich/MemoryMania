@@ -31,7 +31,6 @@
                     android:layout_alignParentTop="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{String.format(@string/Matched_Title, String.valueOf(@integer/match_size))}"
                     android:textColor="@color/colorDark"
                     android:textSize="40sp"
                     android:textStyle="bold" />
