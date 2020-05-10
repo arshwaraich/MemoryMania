@@ -2,7 +2,7 @@
 
 An android application meant to implement a popular memory matching game. Built for shopify's fall term internship application.
 
-[Link](https://github.com/arshwaraich12/MemoryMania/releases) to final submission build.
+[Link](https://github.com/arshwaraich/MemoryMania/releases) to final submission build.
 
 ## Design
 Figma [UI design](https://www.figma.com/file/Ewj2lUbHzuIE9Bium00EDz/Shopify-Memory-Mania?node-id=0%3A1) and [Interactive prototype](https://www.figma.com/proto/Ewj2lUbHzuIE9Bium00EDz/Shopify-Memory-Mania) - A clean and simple design that highlights actions over graphics.
