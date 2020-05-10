@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-        <import type="com.example.memorymania.data.Product.MatchState" alias="MatchState"/>
         <import type="android.view.View"/>
         <variable
-            name="matchState"
-            type="MatchState"/>
+            name="product"
+            type="com.example.memorymania.data.Product"/>
     </data>
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        app:matchState="@{matchState}">
+        android:animateLayoutChanges="false"
+        app:matchState="@{product}">
         <ImageView
             android:id="@+id/image_hidden"
             android:adjustViewBounds="true"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_image_black_24dp"
             android:background="@drawable/button_drawable"
-            android:rotationY="90"/>
+            android:rotationY="0"/>
         <ImageView
             android:id="@+id/image_shown"
             android:adjustViewBounds="true"

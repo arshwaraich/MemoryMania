@@ -15,7 +15,7 @@ public class Products {
     private List<Product> replicateProducts(Context context) {
         Integer totalMatches = context.getResources().getInteger(R.integer.total_matches);
         Integer matchSize = context.getResources().getInteger(R.integer.match_size);
-        products = products.subList(0, totalMatches * matchSize);
+        products = products.subList(0, totalMatches);
 
         List<Product> replicatedProd = new ArrayList<>();
         List<Product> copyProducts =  new ArrayList<>();
