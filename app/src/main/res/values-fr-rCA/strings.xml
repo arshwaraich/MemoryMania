@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Jeu de mémoire</string>
+
+    <string name="title_activity_settings">Paramètres</string>
+    <string name="title_activity_main">Jeu de mémoire &#129300;</string>
+    <string name="title_activity_match">Taille x%s</string>
+
+    <string name="Matched_Progress">%s / %s</string>
+
+    <!-- Main titles -->
+    <string name="main_start_game">Allons-y!</string>
+
+    <!-- Match titles -->
+    <string name="match_start_game">Début</string>
+    <string name="match_shuffle_grid">Aléatoire</string>
+    <string name="match_alert_title">Quitter le jeu?</string>
+    <string name="match_alert_message">Cliquez sur Quitter pour confirmer la sortie du menu principal.</string>
+    <string name="match_alert_p">Quitter</string>
+    <string name="match_alert_n">Annuler</string>
+    <string name="match_prgdlg_msg">Chargement…</string>
+    <string name="match_prgdlg_err">Une erreur s\'est produite… Veuillez réessayer plus tard!</string>
+
+    <string name="result_applause">Bon travail! &#127881;</string>
+    <string name="result_share">Partager</string>
+    <string name="result_send_title">Je suis un dieu memoire!</string>
+    <string name="result_send_msg">J\'ai battu *Jeu de mémoire*! L\'application la plus chaude du PauseStore en %s secondes &#127881;&#127882;!! Découvrez le créateur &#127760;arshwaraich.com</string>
+    <string name="result_card_title">Faites le savoir à vos amis!</string>
+
+    <!-- Preference Titles -->
+    <string name="preferences_header">Préférences</string>
+
+    <!-- Preference Preferences -->
+    <string name="grid_size_title">Taille de la grille</string>
+    <string name="match_size_title">Correspondre à la taille</string>
+    <string name="total_matches_title">Correspondre totale</string>
+</resources>
