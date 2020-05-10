@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymania.R;
@@ -121,7 +122,10 @@ public class MatchRecycleAdapter extends RecyclerView.Adapter<MatchRecycleAdapte
     public MatchRecycleAdapter(List<Product> dataset, Context context) {
         this.dataset = dataset;
         this.context = context;
-        this.NUM_MATCHES = context.getResources().getInteger(R.integer.match_size);
+        this.NUM_MATCHES = Integer.parseInt(
+                PreferenceManager
+                        .getDefaultSharedPreferences(context)
+                        .getString("match_size", "2"));
         this.shuffleProducts();
     }
 

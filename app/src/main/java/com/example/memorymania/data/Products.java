@@ -2,6 +2,8 @@ package com.example.memorymania.data;
 
 import android.content.Context;
 
+import androidx.preference.PreferenceManager;
+
 import com.example.memorymania.R;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,8 +15,14 @@ public class Products {
     private List<Product> products;
 
     private List<Product> replicateProducts(Context context) {
-        Integer totalMatches = context.getResources().getInteger(R.integer.total_matches);
-        Integer matchSize = context.getResources().getInteger(R.integer.match_size);
+        Integer totalMatches = Integer.parseInt(
+                PreferenceManager
+                        .getDefaultSharedPreferences(context)
+                        .getString("total_match_size", "10"));
+        Integer matchSize = Integer.parseInt(
+                PreferenceManager
+                        .getDefaultSharedPreferences(context)
+                        .getString("match_size", "2"));
         products = products.subList(0, totalMatches);
 
         List<Product> replicatedProd = new ArrayList<>();

@@ -3,12 +3,15 @@ package com.example.memorymania.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableInt;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -18,6 +21,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.memorymania.R;
@@ -42,6 +46,25 @@ public class MatchActivity extends AppCompatActivity {
     final ObservableInt numMatched = new ObservableInt();
     final ObservableInt numMax = new ObservableInt();
 
+    @Override
+    public void onBackPressed() {
+        Button button = findViewById(R.id.start_match_button);
+        if(button.getVisibility() == View.GONE) {
+            new AlertDialog.Builder(this)
+                    .setTitle("End game?")
+                    .setMessage("Click quit to confirm exit to main menu.")
+                    .setPositiveButton("Quit", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +84,25 @@ public class MatchActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading....");
         progressDialog.show();
 
+        // Set title text
+        String matchSize = PreferenceManager
+                        .getDefaultSharedPreferences(this)
+                        .getString("match_size", "2");
+        TextView textView = findViewById(R.id.title_text);
+        textView.setText(String.format(getString(R.string.Matched_Title), matchSize));
+
         // Set recycler view
+        int gridSize = Integer.parseInt(
+                PreferenceManager
+                        .getDefaultSharedPreferences(this)
+                        .getString("grid_size", "4"));
+
         final RecyclerView recyclerView = findViewById(R.id.match_grid);
         recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(MatchActivity.this, getResources().getInteger(R.integer.grid_size));
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(MatchActivity.this, gridSize);
         recyclerView.setLayoutManager(layoutManager);
 
-        /*Create handle for the RetrofitInstance interface*/
+        // Handle for the RetrofitInstance interface
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<Products> call = service.getAllProducts();
         call.enqueue(new Callback<Products>() {

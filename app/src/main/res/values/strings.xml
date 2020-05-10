@@ -4,14 +4,17 @@
     <string name="Matched_Title">Match x%s</string>
     <string name="Matched_Progress">%s / %s</string>
 
-    <!-- Difficulty setting -->
-    <string-array name="difficulty_array">
-        <item>Easy</item>
-        <item>Medium</item>
-        <item>Hard</item>
-    </string-array>
+    <string name="title_activity_settings">Settings</string>
 
-    <integer name="grid_size">4</integer>
+    <!-- Difficulty setting -->
     <integer name="match_size">2</integer>
     <integer name="total_matches">10</integer>
+
+    <!-- Preference Titles -->
+    <string name="preferences_header">Preference</string>
+
+    <!-- Preference Preferences -->
+    <string name="grid_size_title">Grid size</string>
+    <string name="match_size_title">Match size</string>
+    <string name="total_matches_title">Total matches</string>
 </resources>
