@@ -44,12 +44,6 @@
                     android:textSize="18sp"
                     android:drawableStart="@drawable/ic_timer_black_24dp"/>
             </RelativeLayout>
-<!--            <ImageView-->
-<!--                android:id="@+id/matched_image"-->
-<!--                android:layout_width="45dp"-->
-<!--                android:layout_height="45dp"-->
-<!--                android:src="@drawable/ic_settings_black_24dp"-->
-<!--                android:background="@drawable/matched_card_drawable"/>-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -103,7 +97,6 @@
                 android:padding="10dp"
                 android:layout_marginStart="5dp"
                 android:minWidth="45dp"
-                android:contentDescription="Shuffle"
                 android:onClick="shuffleMatchGird"/>
         </LinearLayout>
     </RelativeLayout>

@@ -32,6 +32,7 @@
             android:textStyle="bold"
             android:text="Memory Mania &#129300;"/>
         <Button
+            android:id="@+id/starter_button"
             android:onClick="startGame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +40,7 @@
             android:height="45dp"
             android:textColor="@color/colorDark"
             android:textStyle="bold"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:padding="0dp"
             android:textAllCaps="false"
             android:background="@drawable/ripple_drawable"
