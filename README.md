@@ -38,7 +38,7 @@ Gave the translations my best shot but it is basically guess work + google trans
 ### Share
 Added an option to share game results to promote the app as well as it's creator. Also supports french and english.  
   
-![](./screenshots/share_text_en-CA_fr-CA.jpg)
+![](./screenshots/share_text_en-CA_fr-CA.jpg)  
 ![](./screenshots/share_card_en-CA.jpg)
 ![](./screenshots/share_card_fr-CA.jpg)
 
