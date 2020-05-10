@@ -7,8 +7,6 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -16,21 +14,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.memorymania.R;
-import com.example.memorymania.data.Product;
+import com.example.memorymania.data.*;
+import com.example.memorymania.util.*;
 import com.example.memorymania.databinding.ActivityMatchBinding;
-import com.example.memorymania.util.MatchRecycleAdapter;
-import com.example.memorymania.data.Products;
-import com.example.memorymania.util.GetDataService;
-import com.example.memorymania.util.RetrofitClientInstance;
 
 import java.util.List;
 
@@ -51,15 +43,10 @@ public class MatchActivity extends AppCompatActivity {
         Button button = findViewById(R.id.start_match_button);
         if(button.getVisibility() == View.GONE) {
             new AlertDialog.Builder(this)
-                    .setTitle("End game?")
-                    .setMessage("Click quit to confirm exit to main menu.")
-                    .setPositiveButton("Quit", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                        }
-                    })
-                    .setNegativeButton("Cancel", null)
+                    .setTitle(R.string.match_alert_title)
+                    .setMessage(R.string.match_alert_message)
+                    .setPositiveButton(R.string.match_alert_p, (dialog, which) -> finish())
+                    .setNegativeButton(R.string.match_alert_n, null)
                     .show();
         } else {
             super.onBackPressed();
@@ -81,7 +68,7 @@ public class MatchActivity extends AppCompatActivity {
         // Set progress dialog
         // TODO: Use non-ui blocking progress bar
         progressDialog = new ProgressDialog(MatchActivity.this);
-        progressDialog.setMessage("Loading....");
+        progressDialog.setMessage(getString(R.string.match_prgdlg_msg));
         progressDialog.show();
 
         // Set title text
@@ -89,7 +76,7 @@ public class MatchActivity extends AppCompatActivity {
                         .getDefaultSharedPreferences(this)
                         .getString("match_size", "2");
         TextView textView = findViewById(R.id.title_text);
-        textView.setText(String.format(getString(R.string.Matched_Title), matchSize));
+        textView.setText(String.format(getString(R.string.title_activity_match), matchSize));
 
         // Set recycler view
         int gridSize = Integer.parseInt(
@@ -123,7 +110,7 @@ public class MatchActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Products> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(MatchActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MatchActivity.this, R.string.match_prgdlg_err, Toast.LENGTH_SHORT).show();
             }
         });
     }

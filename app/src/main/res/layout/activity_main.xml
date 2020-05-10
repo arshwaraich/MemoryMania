@@ -12,7 +12,7 @@
         android:src="@drawable/ic_settings_black_24dp"
         android:layout_alignParentEnd="true"
         android:onClick="setSettings"
-        android:padding="15dp"/>
+        android:padding="15dp" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,16 +27,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:textSize="60dp"
+            android:textSize="60sp"
             android:textColor="@color/colorDark"
             android:textStyle="bold"
-            android:text="Memory Mania &#129300;"/>
+            android:text="@string/title_activity_main"/>
         <Button
             android:id="@+id/starter_button"
             android:onClick="startGame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Let's go!"
+            android:text="@string/main_start_game"
             android:height="45dp"
             android:textColor="@color/colorDark"
             android:textStyle="bold"
