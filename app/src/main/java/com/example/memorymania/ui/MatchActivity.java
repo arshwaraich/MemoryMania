@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -126,6 +127,8 @@ public class MatchActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.match_grid);
         ((MatchRecycleAdapter) recyclerView.getAdapter()).initDataset();
 
+        enableGridClick(true);
+
         View floatingBar = findViewById(R.id.floating_bar);
         floatingBar.setVisibility(View.VISIBLE);
 
@@ -133,5 +136,10 @@ public class MatchActivity extends AppCompatActivity {
         final Chronometer chronometer = findViewById(R.id.chronometer);
         chronometer.setBase(SystemClock.elapsedRealtime());
         chronometer.start();
+    }
+
+    public void enableGridClick(Boolean status) {
+        View overlayView = findViewById(R.id.overlay_view);
+        overlayView.setVisibility(status ? View.GONE : View.VISIBLE);
     }
 }
