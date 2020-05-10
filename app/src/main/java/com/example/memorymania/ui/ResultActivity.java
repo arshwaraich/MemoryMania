@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Chronometer;
-import android.widget.TextView;
 
 import com.example.memorymania.R;
 
@@ -41,17 +40,15 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     public void shareResult(View view) {
-        String score = (scorel/1000) + " seconds \uD83C\uDF89\uD83C\uDF89!!";
+        String score = String.valueOf(scorel/1000);
 
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TITLE, "I am a memory god");
-        sendIntent.putExtra(Intent.EXTRA_TEXT,
-                "I beat *MemoryMania*! The hottest app in the PauseStore in " + score
-                        + "\nCheckout the creator arshwaraich.com");
+        sendIntent.putExtra(Intent.EXTRA_TITLE, getString(R.string.result_send_title));
+        sendIntent.putExtra(Intent.EXTRA_TEXT, String.format(getString(R.string.result_send_msg), score));
         sendIntent.setType("text/plain");
 
-        Intent shareIntent = Intent.createChooser(sendIntent, "Let your friends know!");
+        Intent shareIntent = Intent.createChooser(sendIntent, getString(R.string.result_card_title));
         startActivity(shareIntent);
     }
 }

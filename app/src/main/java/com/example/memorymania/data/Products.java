@@ -15,11 +15,11 @@ public class Products {
     private List<Product> products;
 
     private List<Product> replicateProducts(Context context) {
-        Integer totalMatches = Integer.parseInt(
+        int totalMatches = Integer.parseInt(
                 PreferenceManager
                         .getDefaultSharedPreferences(context)
                         .getString("total_match_size", "10"));
-        Integer matchSize = Integer.parseInt(
+        int matchSize = Integer.parseInt(
                 PreferenceManager
                         .getDefaultSharedPreferences(context)
                         .getString("match_size", "2"));
