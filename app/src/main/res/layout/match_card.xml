@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="product"
+            type="com.example.memorymania.data.Product"/>
+    </data>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:animateLayoutChanges="false"
+        app:matchState="@{product}">
+        <ImageView
+            android:id="@+id/image_hidden"
+            android:adjustViewBounds="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_image_black_24dp"
+            android:background="@drawable/button_drawable"
+            android:rotationY="0"/>
+        <ImageView
+            android:id="@+id/image_shown"
+            android:adjustViewBounds="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_drawable"
+            android:rotationY="-90"/>
+        <ImageView
+            android:id="@+id/image_matched"
+            android:adjustViewBounds="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_check_black_24dp"
+            android:background="@drawable/button_drawable"
+            android:rotationY="-90"/>
+    </RelativeLayout>
+</layout>

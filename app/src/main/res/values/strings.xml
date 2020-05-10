@@ -1,3 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MemoryMania</string>
+    <string name="app_name">Memory Mania</string>
+
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_main">Memory Mania &#129300;</string>
+    <string name="title_activity_match">Match x%s</string>
+
+    <string name="Matched_Progress">%s / %s</string>
+
+    <!-- Main titles -->
+    <string name="main_start_game">Let\'s go!</string>
+
+    <!-- Match titles -->
+    <string name="match_start_game">Start</string>
+    <string name="match_shuffle_grid">Shuffle grid</string>
+    <string name="match_alert_title">Quit game?</string>
+    <string name="match_alert_message">Click quit to confirm exit to main menu.</string>
+    <string name="match_alert_p">Quit</string>
+    <string name="match_alert_n">Cancel</string>
+    <string name="match_prgdlg_msg">Loading…</string>
+    <string name="match_prgdlg_err">Something went wrong…Please try later!</string>
+
+    <!-- Result titles -->
+    <string name="result_applause">Good job! &#127881;</string>
+    <string name="result_share">Share</string>
+    <string name="result_send_title">I am a memory god</string>
+    <string name="result_send_msg">I beat *Memory Mania*! The hottest app in the PauseStore in %s seconds &#127881;&#127882;!!\nCheckout the creator &#127760;arshwaraich.com</string>
+    <string name="result_card_title">Let your friends know!</string>
+
+    <!-- Setting titles -->
+    <string name="preferences_header">Preference</string>
+
+    <!-- Setting preferences -->
+    <string name="grid_size_title">Grid size</string>
+    <string name="match_size_title">Match size</string>
+    <string name="total_matches_title">Total matches</string>
 </resources>
